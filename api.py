@@ -77,7 +77,7 @@ def download_depot(client, depot_id):
         print("Got manifests from cache for ARMA3 server app ID:", ARMA3_SERVER_APP_ID)
     else:
         print("Fetching fresh manifests from Steam...")
-        manifests_obj = cdn_client.get_manifests(ARMA3_SERVER_APP_ID, branch="creatordlc")
+        manifests_obj = cdn_client.get_manifests(ARMA3_SERVER_APP_ID, branch=os.environ.get("STEAM_BRANCH", "creatordlc"))
         
         save_manifests_to_cache(manifests_obj)
         
@@ -96,7 +96,7 @@ def download_depot(client, depot_id):
     
     print(f"Downloading Manifest ID: {target_manifest['gid']}, Depot ID: {target_manifest['depot_id']}")
 
-    files_generator = cdn_client.iter_files(ARMA3_SERVER_APP_ID, branch="creatordlc", filter_func=lambda d_id, depot_info: d_id == target_manifest['depot_id'])
+    files_generator = cdn_client.iter_files(ARMA3_SERVER_APP_ID, branch=os.environ.get("STEAM_BRANCH", "creatordlc"), filter_func=lambda d_id, depot_info: d_id == target_manifest['depot_id'])
     files = list(files_generator)
     files = [f for f in files if f.is_file]
     print(f"Found {len(files)} files to download")
