@@ -3,6 +3,9 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
     - uses: actions/checkout@master
     - name: Convert repository name to lower case
@@ -25,5 +28,5 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: ghcr.io/${{ env.IMAGE_REPOSITORY }}/arma3server:v2
+        tags: ghcr.io/${{ env.IMAGE_REPOSITORY }}:v2
         platforms: ${{ env.PLATFORMS }}
