@@ -20,7 +20,7 @@ An Arma 3 Dedicated Server. Updates to the latest version every time it is resta
         -v path/to/servermods:/arma3/server/servermods \
         -e STEAM_USER=myusername \
         -e STEAM_PASSWORD=mypassword \
-        ghcr.io/brettmayson/arma3server/arma3server:v2
+        ghcr.io/jamesflanders/arma3server/arma3server:v2
 ```
 
 ### docker-compose
